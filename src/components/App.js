@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import '../index.css';
 import Header from './Header';
 import Main from './Main';
@@ -5,23 +6,24 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 
 function App() {
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+
   return (
     <div className="page">
 
     <Header />
 
     <Main
-      handleEditAvatarClick={() => {
-        console.log("Нажал на редактирование аватара");
-        document.querySelector('.popup_type_edit-avatar').classList.add('popup_opened')
+      onEditAvatar={() => {
+        setIsEditAvatarPopupOpen(true);
       }}
-      handleEditProfileClick={() => {
-        console.log("Нажал на редактирование профиля");
-        document.querySelector('.popup_type_edit-profile').classList.add('popup_opened')
+      onEditProfile={() => {
+        setIsEditProfilePopupOpen(true);
       }}
-      handleAddPlaceClick={() => {
-        console.log("Нажал Добавить карточку");
-        document.querySelector('.popup_type_add-card').classList.add('popup_opened')
+      onAddPlace={() => {
+        setIsAddPlacePopupOpen(true);
       }}
     />
 
@@ -32,6 +34,7 @@ function App() {
       name={'edit-avatar'}
       title={'Обновить аватар'}
       buttonText={'Сохранить'}
+      isOpen={isEditAvatarPopupOpen ? 'popup_opened' : ''}
       children={
         <>
           <label htmlFor="avatar-input" className="popup__field">
@@ -54,6 +57,7 @@ function App() {
       name={'edit-profile'}
       title={'Редактировать профиль'}
       buttonText={'Сохранить'}
+      isOpen={isEditProfilePopupOpen ? 'popup_opened' : ''}
       children={
         <>
           <label htmlFor="name-input" className="popup__field">
@@ -91,6 +95,7 @@ function App() {
       name={'add-card'}
       title={'Новое место'}
       buttonText={'Создать'}
+      isOpen={isAddPlacePopupOpen ? 'popup_opened' : ''}
       children={
         <>
           <label htmlFor="title-input" className="popup__field">

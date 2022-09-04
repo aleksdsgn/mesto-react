@@ -6,7 +6,7 @@ function Main(props) {
 
       <section className="profile">
         <button
-          onClick={props.handleEditAvatarClick}
+          onClick={props.onEditAvatar}
           className="profile__button profile__button_type_edit-profile-avatar"
           type="button"
         >
@@ -20,7 +20,7 @@ function Main(props) {
           <div className="profile__title-with-button">
             <h1 className="profile__title">Имя</h1>
             <button
-              onClick={props.handleEditProfileClick}
+              onClick={props.onEditProfile}
               className="profile__button profile__button_type_edit-profile-info"
               type="button"
             />
@@ -28,7 +28,7 @@ function Main(props) {
           <p className="profile__subtitle">О себе</p>
         </div>
         <button
-          onClick={props.handleAddPlaceClick}
+          onClick={props.onAddPlace}
           className="profile__button profile__button_type_add-card"
           type="button"
         />
