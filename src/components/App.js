@@ -9,7 +9,20 @@ function App() {
 
     <Header />
 
-    <Main />
+    <Main
+      handleEditAvatarClick={() => {
+        console.log("Нажал на редактирование аватара");
+        document.querySelector('.popup_type_edit-avatar').classList.add('popup_opened')
+      }}
+      handleEditProfileClick={() => {
+        console.log("Нажал на редактирование профиля");
+        document.querySelector('.popup_type_edit-profile').classList.add('popup_opened')
+      }}
+      handleAddPlaceClick={() => {
+        console.log("Нажал Добавить карточку");
+        document.querySelector('.popup_type_add-card').classList.add('popup_opened')
+      }}
+    />
 
     <Footer />
 

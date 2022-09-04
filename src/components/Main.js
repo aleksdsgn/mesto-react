@@ -1,11 +1,17 @@
 import avatar from '../images/avatar-base.jpg';
 
-function Main() {
+// handleEditAvatarClick = () => {
+//   console.log("Нажал на редактирование аватара");
+//   // document.querySelector('.popup_type_edit-avatar')
+// }
+
+function Main(props) {
   return (
     <main className="content">
 
       <section className="profile">
         <button
+          onClick={props.handleEditAvatarClick}
           className="profile__button profile__button_type_edit-profile-avatar"
           type="button"
         >
@@ -19,6 +25,7 @@ function Main() {
           <div className="profile__title-with-button">
             <h1 className="profile__title">Имя</h1>
             <button
+              onClick={props.handleEditProfileClick}
               className="profile__button profile__button_type_edit-profile-info"
               type="button"
             />
@@ -26,6 +33,7 @@ function Main() {
           <p className="profile__subtitle">О себе</p>
         </div>
         <button
+          onClick={props.handleAddPlaceClick}
           className="profile__button profile__button_type_add-card"
           type="button"
         />
