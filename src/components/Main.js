@@ -1,10 +1,5 @@
 import avatar from '../images/avatar-base.jpg';
 
-// handleEditAvatarClick = () => {
-//   console.log("Нажал на редактирование аватара");
-//   // document.querySelector('.popup_type_edit-avatar')
-// }
-
 function Main(props) {
   return (
     <main className="content">
