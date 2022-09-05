@@ -1,25 +1,23 @@
 import { useState, useEffect } from 'react';
 import { api } from '../utils/api.js';
-import avatar from '../images/avatar-base.jpg';
+import Card from './Card';
 
 function Main(props) {
   const [userAvatar, setUserAvatar] = useState("");
   const [userName, setUserName] = useState("");
   const [userDescription,setUserDescription] = useState("");
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     Promise.all([
       api.getProfileInfo(),
-      // api.getInitialCards(),
+      api.getInitialCards(),
     ])
-    .then(([userInfo, cards]) => {
+    .then(([userInfo, cardsData]) => {
       setUserAvatar(userInfo.avatar);
       setUserName(userInfo.name);
       setUserDescription(userInfo.about);
-      // newUserInfo.setUserInfo(userInfo);
-      // userId = userInfo._id;
-
-      // cardsList.renderItems(cards);
+      setCards(cardsData);
     })
     .catch((err) => {
       console.log(err);
@@ -60,9 +58,15 @@ function Main(props) {
         />
       </section>
 
+        {/* контейнер для шаблонов карточек */}
       <section className="places">
         <ul className="places__container">
-        {/* контейнер для шаблонов карточек */}
+          {cards.map((card) => (
+            <Card
+              key={(card._id)}
+              card={card}
+            />
+          ))}
         </ul>
       </section>
 
