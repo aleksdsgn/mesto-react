@@ -9,6 +9,11 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const closeAllPopups = () => {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+  }
 
   return (
     <div className="page">
@@ -35,6 +40,7 @@ function App() {
       title={'Обновить аватар'}
       buttonText={'Сохранить'}
       isOpen={isEditAvatarPopupOpen ? 'popup_opened' : ''}
+      onClose={closeAllPopups}
       children={
         <>
           <label htmlFor="avatar-input" className="popup__field">
@@ -58,6 +64,7 @@ function App() {
       title={'Редактировать профиль'}
       buttonText={'Сохранить'}
       isOpen={isEditProfilePopupOpen ? 'popup_opened' : ''}
+      onClose={closeAllPopups}
       children={
         <>
           <label htmlFor="name-input" className="popup__field">
@@ -96,6 +103,7 @@ function App() {
       title={'Новое место'}
       buttonText={'Создать'}
       isOpen={isAddPlacePopupOpen ? 'popup_opened' : ''}
+      onClose={closeAllPopups}
       children={
         <>
           <label htmlFor="title-input" className="popup__field">
