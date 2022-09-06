@@ -3,6 +3,7 @@ import { api } from '../utils/api.js';
 import Card from './Card';
 
 function Main(props) {
+  const {onEditAvatar, onEditProfile, onAddPlace, onCardClick} = props;
   const [userAvatar, setUserAvatar] = useState("");
   const [userName, setUserName] = useState("");
   const [userDescription,setUserDescription] = useState("");
@@ -29,7 +30,7 @@ function Main(props) {
 
       <section className="profile">
         <button
-          onClick={props.onEditAvatar}
+          onClick={onEditAvatar}
           className="profile__button profile__button_type_edit-profile-avatar"
           type="button"
         >
@@ -44,7 +45,7 @@ function Main(props) {
           <div className="profile__title-with-button">
             <h1 className="profile__title">{userName}</h1>
             <button
-              onClick={props.onEditProfile}
+              onClick={onEditProfile}
               className="profile__button profile__button_type_edit-profile-info"
               type="button"
             />
@@ -52,7 +53,7 @@ function Main(props) {
           <p className="profile__subtitle">{userDescription}</p>
         </div>
         <button
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
           className="profile__button profile__button_type_add-card"
           type="button"
         />
@@ -65,6 +66,7 @@ function Main(props) {
             <Card
               key={(card._id)}
               card={card}
+              onCardClick={onCardClick}
             />
           ))}
         </ul>

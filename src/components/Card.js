@@ -1,4 +1,11 @@
-function Card({card: { name, link, likes }}) {
+import React from 'react';
+
+function Card(props) {
+  const { onCardClick, card: { name, link, likes } } = props;
+  function handleCardClick() {
+    onCardClick(link);
+  }
+
   return(
     <li className="places__element">
       <article className="card">
@@ -7,6 +14,7 @@ function Card({card: { name, link, likes }}) {
           className="card__image"
           src={link}
           alt={name}
+          onClick={() => handleCardClick()}
         />
         <div className="card__info">
           <h2 className="card__title">{name}</h2>
