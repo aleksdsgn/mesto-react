@@ -4,6 +4,7 @@ import Card from './Card';
 
 function Main(props) {
   const {onEditAvatar, onEditProfile, onAddPlace, onCardClick} = props;
+
   const [userAvatar, setUserAvatar] = useState("");
   const [userName, setUserName] = useState("");
   const [userDescription,setUserDescription] = useState("");

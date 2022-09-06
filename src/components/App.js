@@ -4,18 +4,21 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-// import ImagePopup from './ImagePopup';
+import ImagePopup from './ImagePopup';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  // const [selectedCard, handleCardClick] = useState(null);
+  const [isCardPopupOpen, setIsCardPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
+
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    // handleCardClick(null);
+    setIsCardPopupOpen(false);
+    setSelectedCard({});
   }
 
   return (
@@ -33,7 +36,10 @@ function App() {
       onAddPlace={() => {
         setIsAddPlacePopupOpen(true);
       }}
-      // onCardClick={handleCardClick}
+      onCardClick={(card) => {
+        setSelectedCard(card);
+        setIsCardPopupOpen(true);
+      }}
     />
 
     <Footer />
@@ -62,7 +68,7 @@ function App() {
       }
     />
 
-    {/* <!-- форма редактирования профиля --> */}
+    {/* форма редактирования профиля */}
     <PopupWithForm
       name={'edit-profile'}
       title={'Редактировать профиль'}
@@ -101,7 +107,7 @@ function App() {
       }
     />
 
-    {/* <!-- форма добавления карточек --> */}
+    {/* форма добавления карточек */}
     <PopupWithForm
       name={'add-card'}
       title={'Новое место'}
@@ -138,34 +144,19 @@ function App() {
       }
     />
 
-    {/* <!-- попап удаления карточки --> */}
+    {/* попап удаления карточки */}
     <PopupWithForm
       name={'delete-card'}
       title={'Вы уверены?'}
       buttonText={'Да'}
     />
-{/*
+
+    {/* попап открытой карточки */}
     <ImagePopup
       card={selectedCard}
-      // isOpen={selectedCard ? 'popup_opened' : ''}
+      isOpen={isCardPopupOpen ? 'popup_opened' : ''}
       onClose={closeAllPopups}
-    /> */}
-
-    <template className="card-template">
-    <li className="places__element">
-      <article className="card">
-        <button className="card__button-delete" type="button" />
-        <img className="card__image" />
-        <div className="card__info">
-          <h2 className="card__title" />
-          <div className="card__like-container">
-            <button className="card__button-like" type="button" />
-            <p className="card__likes-counter" />
-          </div>
-        </div>
-      </article>
-    </li>
-    </template>
+    />
 
     </div>
   );

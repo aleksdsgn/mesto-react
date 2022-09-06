@@ -1,8 +1,8 @@
 function ImagePopup(props) {
-  const {card, onClose} = props;
+  const {card, isOpen, onClose} = props;
 
   return(
-    <section className={`popup popup_type_img ${card}`}>
+    <section className={`popup popup_type_img ${isOpen}`}>
       <figure className="popup__img-container" name="popup-img">
         <button
           className="popup__close-button"
@@ -11,11 +11,11 @@ function ImagePopup(props) {
         />
         <img
           className="popup__image"
-          src={card}
-          alt={card}
+          src={card.link}
+          alt={card.name}
         />
         <figcaption className="popup__caption">
-          {/* {card.name} */}
+          {card.name}
         </figcaption>
       </figure>
     </section>
@@ -23,8 +23,3 @@ function ImagePopup(props) {
 }
 
 export default ImagePopup;
-
-// {`popup popup_type_${props.name} ${props.isOpen}`}
-// {/* <section className="popup popup_type_img"> */}
-
-// <section className={`popup popup_type_img ${isOpen}`}>
