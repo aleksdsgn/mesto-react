@@ -4,18 +4,18 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-import ImagePopup from './ImagePopup';
+// import ImagePopup from './ImagePopup';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [selectedCard, handleCardClick] = useState(null);
+  // const [selectedCard, handleCardClick] = useState(null);
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    handleCardClick(null);
+    // handleCardClick(null);
   }
 
   return (
@@ -33,7 +33,7 @@ function App() {
       onAddPlace={() => {
         setIsAddPlacePopupOpen(true);
       }}
-      onCardClick={handleCardClick}
+      // onCardClick={handleCardClick}
     />
 
     <Footer />
@@ -144,12 +144,12 @@ function App() {
       title={'Вы уверены?'}
       buttonText={'Да'}
     />
-
+{/*
     <ImagePopup
       card={selectedCard}
       // isOpen={selectedCard ? 'popup_opened' : ''}
       onClose={closeAllPopups}
-    />
+    /> */}
 
     <template className="card-template">
     <li className="places__element">

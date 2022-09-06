@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Card(props) {
-  const { onCardClick, card: { name, link, likes } } = props;
-  function handleCardClick() {
-    onCardClick(link);
-  }
+function Card({card: { name, link, likes }}) {
+  // const { onCardClick, card: { name, link, likes } } = props;
+  // function handleClick() {
+  //   onCardClick(link);
+  // }
 
   return(
     <li className="places__element">
@@ -14,7 +14,7 @@ function Card(props) {
           className="card__image"
           src={link}
           alt={name}
-          onClick={() => handleCardClick()}
+          // onClick={() => handleClick()}
         />
         <div className="card__info">
           <h2 className="card__title">{name}</h2>
