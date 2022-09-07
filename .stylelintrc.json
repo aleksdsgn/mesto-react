@@ -7,7 +7,7 @@
     "stylelint-order"
   ],
   "ignoreFiles": [
-    "src/mages/*",
+    "src/images/*",
     "src/vendor/fonts/*",
     "src/vendor/*.css"
   ],

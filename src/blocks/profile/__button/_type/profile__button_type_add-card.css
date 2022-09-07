@@ -3,9 +3,9 @@
   height: 50px;
   border: 2px solid #fff;
   background-color: transparent;
-  border-radius: 2px;
-  background-image: url("../../../../images/button-add.svg");
+  background-image: url('../../../../images/button-add.svg');
   background-size: 22px;
+  border-radius: 2px;
   justify-self: end;
 }
 
