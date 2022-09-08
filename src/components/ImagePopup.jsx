@@ -1,6 +1,4 @@
-function ImagePopup(props) {
-  const { card, isOpen, onClose } = props;
-
+function ImagePopup({ card, isOpen, onClose }) {
   return (
     <section className={`popup popup_type_img ${isOpen}`}>
       <figure className="popup__img-container" name="popup-img">

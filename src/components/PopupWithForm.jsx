@@ -1,13 +1,11 @@
-function PopupWithForm(props) {
-  const {
-    isOpen,
-    onClose,
-    children,
-    buttonText,
-    name,
-    title,
-  } = props;
-
+function PopupWithForm({
+  isOpen,
+  onClose,
+  children,
+  buttonText,
+  name,
+  title,
+}) {
   return (
     <section className={`popup popup_type_${name} ${isOpen}`}>
       <form

@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 import { api } from '../utils/api';
 import Card from './Card';
 
-function Main(props) {
-  const {
-    onEditAvatar,
-    onEditProfile,
-    onAddPlace,
-    onCardClick,
-  } = props;
-
+function Main({
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
+  onCardClick,
+}) {
   const [userAvatar, setUserAvatar] = useState('');
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
