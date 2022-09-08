@@ -51,22 +51,19 @@ function App() {
         buttonText="Сохранить"
         isOpen={isEditAvatarPopupOpen ? 'popup_opened' : ''}
         onClose={closeAllPopups}
-        childrenDiv={
-          (
-            <label htmlFor="avatar-input" className="popup__field">
-              <input
-                name="link"
-                className="popup__input popup__input_type_avatar"
-                type="url"
-                placeholder="Ссылка на картинку"
-                required=""
-                id="avatar-input"
-              />
-              <span className="popup__error popup__error_visible avatar-input-error" />
-            </label>
-          )
-        }
-      />
+      >
+        <label htmlFor="avatar-input" className="popup__field">
+          <input
+            name="link"
+            className="popup__input popup__input_type_avatar"
+            type="url"
+            placeholder="Ссылка на картинку"
+            required=""
+            id="avatar-input"
+          />
+          <span className="popup__error popup__error_visible avatar-input-error" />
+        </label>
+      </PopupWithForm>
 
       {/* форма редактирования профиля */}
       <PopupWithForm
@@ -75,39 +72,36 @@ function App() {
         buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen ? 'popup_opened' : ''}
         onClose={closeAllPopups}
-        childrenDiv={
-          (
-            <>
-              <label htmlFor="name-input" className="popup__field">
-                <input
-                  name="name"
-                  className="popup__input popup__input_type_name"
-                  type="text"
-                  placeholder="Имя"
-                  required=""
-                  minLength={2}
-                  maxLength={40}
-                  id="name-input"
-                />
-                <span className="popup__error popup__error_visible name-input-error" />
-              </label>
-              <label htmlFor="about-input" className="popup__field">
-                <input
-                  name="about"
-                  className="popup__input popup__input_type_about"
-                  type="text"
-                  placeholder="О себе"
-                  required=""
-                  minLength={2}
-                  maxLength={200}
-                  id="about-input"
-                />
-                <span className="popup__error popup__error_visible about-input-error" />
-              </label>
-            </>
-          )
-        }
-      />
+      >
+        <>
+          <label htmlFor="name-input" className="popup__field">
+            <input
+              name="name"
+              className="popup__input popup__input_type_name"
+              type="text"
+              placeholder="Имя"
+              required=""
+              minLength={2}
+              maxLength={40}
+              id="name-input"
+            />
+            <span className="popup__error popup__error_visible name-input-error" />
+          </label>
+          <label htmlFor="about-input" className="popup__field">
+            <input
+              name="about"
+              className="popup__input popup__input_type_about"
+              type="text"
+              placeholder="О себе"
+              required=""
+              minLength={2}
+              maxLength={200}
+              id="about-input"
+            />
+            <span className="popup__error popup__error_visible about-input-error" />
+          </label>
+        </>
+      </PopupWithForm>
 
       {/* форма добавления карточек */}
       <PopupWithForm
@@ -116,37 +110,34 @@ function App() {
         buttonText="Создать"
         isOpen={isAddPlacePopupOpen ? 'popup_opened' : ''}
         onClose={closeAllPopups}
-        childrenDiv={
-          (
-            <>
-              <label htmlFor="title-input" className="popup__field">
-                <input
-                  name="name"
-                  className="popup__input popup__input_type_title"
-                  type="text"
-                  placeholder="Название"
-                  required=""
-                  minLength={2}
-                  maxLength={30}
-                  id="title-input"
-                />
-                <span className="popup__error popup__error_visible title-input-error" />
-              </label>
-              <label htmlFor="title-input" className="popup__field">
-                <input
-                  name="link"
-                  className="popup__input popup__input_type_link"
-                  type="url"
-                  placeholder="Ссылка на картинку"
-                  required=""
-                  id="link-input"
-                />
-                <span className="popup__error popup__error_visible link-input-error" />
-              </label>
-            </>
-          )
-        }
-      />
+      >
+        <>
+          <label htmlFor="title-input" className="popup__field">
+            <input
+              name="name"
+              className="popup__input popup__input_type_title"
+              type="text"
+              placeholder="Название"
+              required=""
+              minLength={2}
+              maxLength={30}
+              id="title-input"
+            />
+            <span className="popup__error popup__error_visible title-input-error" />
+          </label>
+          <label htmlFor="title-input" className="popup__field">
+            <input
+              name="link"
+              className="popup__input popup__input_type_link"
+              type="url"
+              placeholder="Ссылка на картинку"
+              required=""
+              id="link-input"
+            />
+            <span className="popup__error popup__error_visible link-input-error" />
+          </label>
+        </>
+      </PopupWithForm>
 
       {/* попап удаления карточки */}
       <PopupWithForm

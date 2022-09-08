@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api } from '../utils/api.js';
+import { api } from '../utils/api';
 import Card from './Card';
 
 function Main(props) {
@@ -7,7 +7,7 @@ function Main(props) {
     onEditAvatar,
     onEditProfile,
     onAddPlace,
-    onCardClick
+    onCardClick,
   } = props;
 
   const [userAvatar, setUserAvatar] = useState('');
@@ -68,7 +68,7 @@ function Main(props) {
         />
       </section>
 
-        {/* контейнер для шаблонов карточек */}
+      {/* контейнер для шаблонов карточек */}
       <section className="places">
         <ul className="places__container">
           {cards.map((card) => (
@@ -82,7 +82,7 @@ function Main(props) {
       </section>
 
     </main>
-  )
+  );
 }
 
 export default Main;

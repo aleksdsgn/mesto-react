@@ -4,12 +4,14 @@ class Api {
     this._headers = apiConfig.headers;
   }
 
+  /* eslint-disable */
   _handleResponse(res) {
+    /* eslint-disable */
     if (res.ok) {
       return res.json();
     }
     // если ошибка, отклоняем промис
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
   // получение данных профиля с сервера
@@ -24,10 +26,7 @@ class Api {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        about: about,
-      }),
+      body: JSON.stringify({ name, about }),
     }).then(this._handleResponse);
   }
 
@@ -43,10 +42,7 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        link: link,
-      }),
+      body: JSON.stringify({ name, link }),
     }).then(this._handleResponse);
   }
 

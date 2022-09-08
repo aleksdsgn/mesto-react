@@ -12,6 +12,7 @@ parserOptions:
 plugins:
   - react
 rules:
+  no-console: off
   linebreak-style: 0
   react/react-in-jsx-scope: off
   jsx-a11y/tabindex-no-positive: off
@@ -29,4 +30,4 @@ rules:
     "ignoreStrings": true,
     "ignoreTemplateLiterals": true
   }]
-  no-console: ["error", { allow: ["error"] }]
+  # no-console: ["error", { allow: ["error"] }]

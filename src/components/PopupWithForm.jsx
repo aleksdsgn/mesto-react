@@ -1,12 +1,20 @@
 function PopupWithForm(props) {
-  const { isOpen, onClose, childrenDiv, buttonText, name, title } = props;
+  const {
+    isOpen,
+    onClose,
+    children,
+    buttonText,
+    name,
+    title,
+  } = props;
 
   return (
     <section className={`popup popup_type_${name} ${isOpen}`}>
       <form
         className="popup__form"
         name={name}
-        noValidate="">
+        noValidate=""
+      >
         <button
           className="popup__close-button"
           type="button"
@@ -14,7 +22,7 @@ function PopupWithForm(props) {
           onClick={onClose}
         />
         <h3 className="popup__title">{title}</h3>
-        {childrenDiv}
+        {children}
         <button
           className="popup__submit-button"
           type="submit"
@@ -24,7 +32,7 @@ function PopupWithForm(props) {
         </button>
       </form>
     </section>
-  )
+  );
 }
 
 export default PopupWithForm;
