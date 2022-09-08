@@ -12,6 +12,7 @@ parserOptions:
 plugins:
   - react
 rules:
+  linebreak-style: 0
   react/react-in-jsx-scope: off
   jsx-a11y/tabindex-no-positive: off
   jsx-a11y/anchor-has-content: off

@@ -3,11 +3,16 @@ import { api } from '../utils/api.js';
 import Card from './Card';
 
 function Main(props) {
-  const {onEditAvatar, onEditProfile, onAddPlace, onCardClick} = props;
+  const {
+    onEditAvatar,
+    onEditProfile,
+    onAddPlace,
+    onCardClick
+  } = props;
 
-  const [userAvatar, setUserAvatar] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userDescription,setUserDescription] = useState("");
+  const [userAvatar, setUserAvatar] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -15,15 +20,15 @@ function Main(props) {
       api.getProfileInfo(),
       api.getInitialCards(),
     ])
-    .then(([userInfo, cardsData]) => {
-      setUserAvatar(userInfo.avatar);
-      setUserName(userInfo.name);
-      setUserDescription(userInfo.about);
-      setCards(cardsData);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then(([userInfo, cardsData]) => {
+        setUserAvatar(userInfo.avatar);
+        setUserName(userInfo.name);
+        setUserDescription(userInfo.about);
+        setCards(cardsData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
@@ -34,6 +39,7 @@ function Main(props) {
           onClick={onEditAvatar}
           className="profile__button profile__button_type_edit-profile-avatar"
           type="button"
+          aria-label="Редактировать аватар"
         >
           <img
             src={userAvatar}
@@ -49,6 +55,7 @@ function Main(props) {
               onClick={onEditProfile}
               className="profile__button profile__button_type_edit-profile-info"
               type="button"
+              aria-label="Редактировать профиль"
             />
           </div>
           <p className="profile__subtitle">{userDescription}</p>
@@ -57,6 +64,7 @@ function Main(props) {
           onClick={onAddPlace}
           className="profile__button profile__button_type_add-card"
           type="button"
+          aria-label="Добавить новое место"
         />
       </section>
 

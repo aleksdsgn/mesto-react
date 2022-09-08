@@ -22,7 +22,7 @@ class Api {
   // сохранение отредактированных данных профиля на сервере
   updateProfileInfo(name, about) {
     return fetch(`${this._url}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: name,
@@ -41,7 +41,7 @@ class Api {
   // создание и загрузка новой карточки на сервер
   createCard(name, link) {
     return fetch(`${this._url}/cards`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
         name: name,
@@ -53,7 +53,7 @@ class Api {
   // удаление карточки с сервера
   deleteCardById(id) {
     return fetch(`${this._url}/cards/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -61,7 +61,7 @@ class Api {
   // проставление лайка
   addLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
-      method: "PUT",
+      method: 'PUT',
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -69,7 +69,7 @@ class Api {
   // удаление лайка
   deleteLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -77,7 +77,7 @@ class Api {
   // изменение аватара
   editAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ avatar: data }),
     }).then(this._handleResponse);
@@ -85,9 +85,9 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-48",
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-48',
   headers: {
-    authorization: "c55292d9-aff2-4dc6-91be-f27388b53ee9",
-    "Content-Type": "application/json",
+    authorization: 'c55292d9-aff2-4dc6-91be-f27388b53ee9',
+    'Content-Type': 'application/json',
   },
 });
