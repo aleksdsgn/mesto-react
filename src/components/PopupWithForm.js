@@ -1,5 +1,5 @@
 function PopupWithForm(props) {
-  const {isOpen, onClose, children, buttonText, name, title} = props;
+  const {isOpen, onClose, childrenDiv, buttonText, name, title} = props;
 
   return (
     <section className={`popup popup_type_${name} ${isOpen}`}>
@@ -11,7 +11,7 @@ function PopupWithForm(props) {
           onClick={onClose}
         />
         <h3 className="popup__title">{title}</h3>
-        {children}
+        {childrenDiv}
         <button
           className="popup__submit-button"
           type="submit"
