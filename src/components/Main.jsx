@@ -13,7 +13,15 @@ function Main({
 
   const currentUser = useContext(CurrentUserContext);
 
-/* eslint-disable */
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => ((c._id === card._id) ? newCard : c)));
+    });
+  }
+
   useEffect(() => {
     Promise.all([
       api.getInitialCards(),
@@ -25,7 +33,6 @@ function Main({
         console.log(err);
       });
   }, []);
-/* eslint-disable */
 
   return (
     <main className="content">
@@ -63,7 +70,7 @@ function Main({
           aria-label="Добавить новое место"
         />
       </section>
-
+      {/* eslint-disable */}
       {/* контейнер для шаблонов карточек */}
       <section className="places">
         <ul className="places__container">
@@ -72,11 +79,12 @@ function Main({
               key={(card._id)}
               card={card}
               onCardClick={onCardClick}
+              onCardLike={handleCardLike}
             />
           ))}
         </ul>
       </section>
-
+      {/* eslint-disable */}
     </main>
   );
 }

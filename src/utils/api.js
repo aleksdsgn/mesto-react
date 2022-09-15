@@ -54,6 +54,14 @@ class Api {
     }).then(this._handleResponse);
   }
 
+  // переключение лайка
+  changeLikeCardStatus(id, liked) {
+    if (liked) {
+      return this.addLike(id);
+    }
+    return this.deleteLike(id);
+  }
+
   // проставление лайка
   addLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
