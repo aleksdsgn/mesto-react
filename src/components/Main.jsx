@@ -22,6 +22,16 @@ function Main({
     });
   }
 
+  function handleCardDelete(card) {
+    api.deleteCardById(card._id).then(() => {
+      setCards((state) => state.filter((_id) => _id !== card._id));
+    });
+
+    // api.deleteCardById(card._id).then(() => {
+    // const updatedCards = cards.filter((_id) => _id !== card._id);
+    // setCards(updatedCards);
+  }
+
   useEffect(() => {
     Promise.all([
       api.getInitialCards(),
@@ -80,6 +90,7 @@ function Main({
               card={card}
               onCardClick={onCardClick}
               onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
             />
           ))}
         </ul>

@@ -1,7 +1,12 @@
 import { useContext } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Card({ card, onCardClick, onCardLike }) {
+function Card({
+  card,
+  onCardClick,
+  onCardLike,
+  onCardDelete,
+}) {
   // подписка на контекст
   const currentUser = useContext(CurrentUserContext);
 
@@ -31,10 +36,20 @@ function Card({ card, onCardClick, onCardLike }) {
     onCardLike(card);
   }
 
+  // обработчик клика кнопки delete
+  function handleDeleteClick() {
+    onCardDelete(card);
+  }
+
   return (
     <li className="places__element">
       <article className="card">
-        <button className={cardDeleteButtonClassName} type="button" aria-label="Удалить" />
+        <button
+          onClick={() => handleDeleteClick()}
+          className={cardDeleteButtonClassName}
+          type="button"
+          aria-label="Удалить"
+        />
         {/* eslint-disable */}
         <img
           className="card__image"
