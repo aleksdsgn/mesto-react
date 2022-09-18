@@ -33,6 +33,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isCardPopupOpen, setIsCardPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
+  const [cards, setCards] = useState([]);
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -66,6 +67,36 @@ function App() {
       });
   };
 
+  // Обработчик лайка карточки
+  const handleCardLike = (card) => {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => ((c._id === card._id) ? newCard : c)));
+    });
+  };
+
+  // Обработчик удаления карточки
+  const handleCardDelete = (card) => {
+    api.deleteCardById(card._id).then(() => {
+      setCards((state) => state.filter((_id) => _id !== card._id));
+    });
+  };
+
+  // Запрос карточек через API
+  useEffect(() => {
+    Promise.all([
+      api.getInitialCards(),
+    ])
+      .then(([cardsData]) => {
+        setCards(cardsData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="page">
 
@@ -86,6 +117,9 @@ function App() {
             setSelectedCard(card);
             setIsCardPopupOpen(true);
           }}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
 
         <Footer />
