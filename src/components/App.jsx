@@ -6,6 +6,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -53,6 +54,18 @@ function App() {
       });
   };
 
+  // Запись обновленной ссылки на аватар
+  const handleUpdateAvatar = (updatedData) => {
+    api.editAvatar(updatedData.avatar)
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="page">
 
@@ -78,25 +91,11 @@ function App() {
         <Footer />
 
         {/* форма редактирования аватара */}
-        <PopupWithForm
-          name="edit-avatar"
-          title="Обновить аватар"
-          buttonText="Сохранить"
-          isOpen={isEditAvatarPopupOpen ? 'popup_opened' : ''}
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-        >
-          <label htmlFor="avatar-input" className="popup__field">
-            <input
-              name="link"
-              className="popup__input popup__input_type_avatar"
-              type="url"
-              placeholder="Ссылка на картинку"
-              required=""
-              id="avatar-input"
-            />
-            <span className="popup__error popup__error_visible avatar-input-error" />
-          </label>
-        </PopupWithForm>
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
         {/* форма редактирования профиля */}
         <EditProfilePopup
