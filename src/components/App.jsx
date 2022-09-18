@@ -5,6 +5,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
 
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -26,8 +27,6 @@ function App() {
       });
   }, []);
 
-  // console.log(currentUser);
-
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -40,6 +39,18 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsCardPopupOpen(false);
     setSelectedCard({});
+  };
+
+  // Запись обновленных пользовательских данных
+  const handleUpdateUser = (updatedData) => {
+    api.updateProfileInfo(updatedData.name, updatedData.about)
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -88,42 +99,11 @@ function App() {
         </PopupWithForm>
 
         {/* форма редактирования профиля */}
-        <PopupWithForm
-          name="edit-profile"
-          title="Редактировать профиль"
-          buttonText="Сохранить"
-          isOpen={isEditProfilePopupOpen ? 'popup_opened' : ''}
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-        >
-          <>
-            <label htmlFor="name-input" className="popup__field">
-              <input
-                name="name"
-                className="popup__input popup__input_type_name"
-                type="text"
-                placeholder="Имя"
-                required=""
-                minLength={2}
-                maxLength={40}
-                id="name-input"
-              />
-              <span className="popup__error popup__error_visible name-input-error" />
-            </label>
-            <label htmlFor="about-input" className="popup__field">
-              <input
-                name="about"
-                className="popup__input popup__input_type_about"
-                type="text"
-                placeholder="О себе"
-                required=""
-                minLength={2}
-                maxLength={200}
-                id="about-input"
-              />
-              <span className="popup__error popup__error_visible about-input-error" />
-            </label>
-          </>
-        </PopupWithForm>
+          onUpdateUser={handleUpdateUser}
+        />
 
         {/* форма добавления карточек */}
         <PopupWithForm

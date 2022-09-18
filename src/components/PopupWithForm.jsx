@@ -5,13 +5,15 @@ function PopupWithForm({
   buttonText,
   name,
   title,
+  onSubmit,
 }) {
   return (
-    <section className={`popup popup_type_${name} ${isOpen}`}>
+    <section className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}>
       <form
         className="popup__form"
         name={name}
         noValidate=""
+        onSubmit={onSubmit}
       >
         <button
           className="popup__close-button"
