@@ -7,6 +7,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -139,40 +140,10 @@ function App() {
         />
 
         {/* форма добавления карточек */}
-        <PopupWithForm
-          name="add-card"
-          title="Новое место"
-          buttonText="Создать"
-          isOpen={isAddPlacePopupOpen ? 'popup_opened' : ''}
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-        >
-          <>
-            <label htmlFor="title-input" className="popup__field">
-              <input
-                name="name"
-                className="popup__input popup__input_type_title"
-                type="text"
-                placeholder="Название"
-                required=""
-                minLength={2}
-                maxLength={30}
-                id="title-input"
-              />
-              <span className="popup__error popup__error_visible title-input-error" />
-            </label>
-            <label htmlFor="title-input" className="popup__field">
-              <input
-                name="link"
-                className="popup__input popup__input_type_link"
-                type="url"
-                placeholder="Ссылка на картинку"
-                required=""
-                id="link-input"
-              />
-              <span className="popup__error popup__error_visible link-input-error" />
-            </label>
-          </>
-        </PopupWithForm>
+        />
 
         {/* попап удаления карточки */}
         <PopupWithForm
