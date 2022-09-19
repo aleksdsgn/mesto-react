@@ -3,11 +3,12 @@ import '../index.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
+// import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import PopupConfirmDelete from './PopupConfirmDelete';
 
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -18,6 +19,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isCardPopupOpen, setIsCardPopupOpen] = useState(false);
+  const [isPopupConfirmDeleteOpen, setIsPopupConfirmDeleteOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
 
@@ -41,6 +43,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsCardPopupOpen(false);
+    setIsPopupConfirmDeleteOpen(false);
     setSelectedCard({});
   };
 
@@ -90,11 +93,17 @@ function App() {
     });
   };
 
-  // Обработчик удаления карточки
+  // Открытие попапа с подтверждением удаления карточки
   const handleCardDelete = (card) => {
-    api.deleteCardById(card._id).then(() => {
-      setCards((state) => state.filter((_id) => _id !== card._id));
-    });
+    setSelectedCard(card);
+    setIsPopupConfirmDeleteOpen(true);
+  };
+  // Удаления карточки
+  const handleConfirmDeleteSubmit = () => {
+    api.deleteCardById(selectedCard._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== selectedCard._id));
+      });
   };
 
   return (
@@ -146,10 +155,10 @@ function App() {
         />
 
         {/* попап удаления карточки */}
-        <PopupWithForm
-          name="delete-card"
-          title="Вы уверены?"
-          buttonText="Да"
+        <PopupConfirmDelete
+          isOpen={isPopupConfirmDeleteOpen}
+          onClose={closeAllPopups}
+          onConfirm={handleConfirmDeleteSubmit}
         />
 
         {/* попап открытой карточки */}
