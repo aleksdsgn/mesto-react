@@ -14,27 +14,27 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-
-  useEffect(() => {
-    Promise.all([
-      api.getProfileInfo(),
-      // api.getInitialCards(),
-    ])
-      .then(([userInfo/* , cardsData */]) => {
-        setCurrentUser(userInfo);
-        // setCards(cardsData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isCardPopupOpen, setIsCardPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
+
+  // Запрос карточек и данных профиля через API
+  useEffect(() => {
+    Promise.all([
+      api.getProfileInfo(),
+      api.getInitialCards(),
+    ])
+      .then(([userInfo, cardsData]) => {
+        setCurrentUser(userInfo);
+        setCards(cardsData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -68,6 +68,18 @@ function App() {
       });
   };
 
+  // Создание новой карточки
+  const handleAddPlaceSubmit = (name, link) => {
+    api.createCard(name, link)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   // Обработчик лайка карточки
   const handleCardLike = (card) => {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -84,19 +96,6 @@ function App() {
       setCards((state) => state.filter((_id) => _id !== card._id));
     });
   };
-
-  // Запрос карточек через API
-  useEffect(() => {
-    Promise.all([
-      api.getInitialCards(),
-    ])
-      .then(([cardsData]) => {
-        setCards(cardsData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <div className="page">
@@ -143,6 +142,7 @@ function App() {
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
         />
 
         {/* попап удаления карточки */}
