@@ -5,6 +5,8 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  // текст в кнопке по умолчанию
+  const [buttonText, setButtonText] = useState('Сохранить');
 
   // подписка на контекст
   const currentUser = useContext(CurrentUserContext);
@@ -27,6 +29,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   // Обработчик сабмита
   const handleSubmit = (e) => {
+    // после нажатия показываем в кнопке "индикатор" отправки
+    setButtonText('Сохранение...');
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
@@ -40,7 +44,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     <PopupWithForm
       name="edit-profile"
       title="Редактировать профиль"
-      buttonText="Сохранить"
+      buttonText={buttonText}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

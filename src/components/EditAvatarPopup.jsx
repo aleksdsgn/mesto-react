@@ -1,10 +1,14 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   const avatarRef = useRef();
+  // текст в кнопке по умолчанию
+  const [buttonText, setButtonText] = useState('Сохранить');
 
   const handleSubmit = (e) => {
+    // после нажатия показываем в кнопке "индикатор" отправки
+    setButtonText('Сохранение...');
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // Передаём значения инпута во внешний обработчик
@@ -17,7 +21,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     <PopupWithForm
       name="edit-avatar"
       title="Обновить аватар"
-      buttonText="Сохранить"
+      buttonText={buttonText}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
