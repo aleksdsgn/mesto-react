@@ -3,7 +3,6 @@ import '../index.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-// import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -93,6 +92,27 @@ function App() {
     });
   };
 
+  // Открытие попапа редактирования аватара
+  const handleEditAvatar = () => {
+    setIsEditAvatarPopupOpen(true);
+  };
+
+  // Открытие попапа редактирования информации о пользователе
+  const handleEditProfile = () => {
+    setIsEditProfilePopupOpen(true);
+  };
+
+  // Открытие попапа добавления новой карточки
+  const handleAddPlace = () => {
+    setIsAddPlacePopupOpen(true);
+  };
+
+  // Открытие попапа с увеличенной картинкой
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    setIsCardPopupOpen(true);
+  };
+
   // Открытие попапа с подтверждением удаления карточки
   const handleCardDelete = (card) => {
     setSelectedCard(card);
@@ -114,19 +134,10 @@ function App() {
         <Header />
 
         <Main
-          onEditAvatar={() => {
-            setIsEditAvatarPopupOpen(true);
-          }}
-          onEditProfile={() => {
-            setIsEditProfilePopupOpen(true);
-          }}
-          onAddPlace={() => {
-            setIsAddPlacePopupOpen(true);
-          }}
-          onCardClick={(card) => {
-            setSelectedCard(card);
-            setIsCardPopupOpen(true);
-          }}
+          onEditAvatar={handleEditAvatar}
+          onEditProfile={handleEditProfile}
+          onAddPlace={handleAddPlace}
+          onCardClick={handleCardClick}
           cards={cards}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
