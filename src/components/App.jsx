@@ -103,6 +103,7 @@ function App() {
     api.deleteCardById(selectedCard._id)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== selectedCard._id));
+        closeAllPopups();
       });
   };
 

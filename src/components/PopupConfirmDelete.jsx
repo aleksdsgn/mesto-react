@@ -1,6 +1,13 @@
 import PopupWithForm from './PopupWithForm';
 
-function PopupConfirmDelete({ isOpen, onClose }) {
+function PopupConfirmDelete({ isOpen, onClose, onConfirm }) {
+  const handleSubmit = (e) => {
+    // Запрещаем браузеру переходить по адресу формы
+    e.preventDefault();
+    // Передаём значения инпута во внешний обработчик
+    onConfirm();
+  };
+
   return (
     <PopupWithForm
       name="delete-card"
@@ -8,7 +15,7 @@ function PopupConfirmDelete({ isOpen, onClose }) {
       buttonText="Да"
       isOpen={isOpen}
       onClose={onClose}
-      // onConfirm={handleSubmit}
+      onSubmit={handleSubmit}
     />
   );
 }
