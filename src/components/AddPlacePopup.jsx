@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
@@ -28,6 +28,11 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     setNamePlace('');
     setLinkPlace('');
   };
+
+  // Сбрасывать текст кнопки при открытии попапа
+  useEffect(() => {
+    setButtonText('Создать');
+  }, [isOpen]);
 
   return (
     <PopupWithForm

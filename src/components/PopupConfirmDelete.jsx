@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function PopupConfirmDelete({ isOpen, onClose, onConfirm }) {
@@ -13,6 +13,11 @@ function PopupConfirmDelete({ isOpen, onClose, onConfirm }) {
     // Передаём значения инпута во внешний обработчик
     onConfirm();
   };
+
+  // Сбрасывать текст кнопки при открытии попапа
+  useEffect(() => {
+    setButtonText('Да');
+  }, [isOpen]);
 
   return (
     <PopupWithForm

@@ -40,6 +40,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     });
   };
 
+  // Сбрасывать текст кнопки при открытии попапа
+  useEffect(() => {
+    setButtonText('Сохранить');
+  }, [isOpen]);
+
   return (
     <PopupWithForm
       name="edit-profile"

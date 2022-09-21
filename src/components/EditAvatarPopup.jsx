@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
@@ -16,6 +16,11 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       avatar: avatarRef.current.value,
     });
   };
+
+  // Сбрасывать текст кнопки при открытии попапа
+  useEffect(() => {
+    setButtonText('Сохранить');
+  }, [isOpen]);
 
   return (
     <PopupWithForm
