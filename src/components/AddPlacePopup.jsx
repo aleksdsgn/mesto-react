@@ -25,13 +25,14 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
     onAddPlace(namePlace, linkPlace);
-    setNamePlace('');
-    setLinkPlace('');
   };
 
-  // Сбрасывать текст кнопки при открытии попапа
   useEffect(() => {
+    // Сбрас текста кнопки при открытии попапа
     setButtonText('Создать');
+    // Очистка полей ввода
+    setNamePlace('');
+    setLinkPlace('');
   }, [isOpen]);
 
   return (

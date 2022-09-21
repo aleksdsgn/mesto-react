@@ -17,9 +17,11 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     });
   };
 
-  // Сбрасывать текст кнопки при открытии попапа
   useEffect(() => {
+    // Сбрас текста кнопки при открытии попапа
     setButtonText('Сохранить');
+    // Сбрас поля ввода
+    avatarRef.current.value = '';
   }, [isOpen]);
 
   return (
