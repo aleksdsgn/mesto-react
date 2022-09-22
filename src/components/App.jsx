@@ -47,10 +47,45 @@ function App() {
     setSelectedCard({});
   };
 
-  // Запись обновленных пользовательских данных
-  const handleUpdateUser = (updatedData) => {
+  // -------- Обработчики при открытии попапов -------- //
+
+  // Открытие попапа редактирования аватара
+  const handleEditAvatar = () => {
+    setButtonText('Сохранить');
+    setIsEditAvatarPopupOpen(true);
+  };
+
+  // Открытие попапа редактирования информации о пользователе
+  const handleEditProfile = () => {
+    setButtonText('Сохранить');
+    setIsEditProfilePopupOpen(true);
+  };
+
+  // Открытие попапа добавления новой карточки
+  const handleAddPlace = () => {
+    setButtonText('Создать');
+    setIsAddPlacePopupOpen(true);
+  };
+
+  // Открытие попапа с подтверждением удаления карточки
+  const handleCardDelete = (card) => {
+    setButtonText('Да');
+    setSelectedCard(card);
+    setIsPopupConfirmDeleteOpen(true);
+  };
+
+  // Открытие попапа с увеличенной картинкой
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    setIsCardPopupOpen(true);
+  };
+
+  // -------- Обработчики при сабмите -------- //
+
+  // Запись обновленной ссылки на аватар
+  const handleUpdateAvatar = (updatedData) => {
     setButtonText('Сохранение...');
-    api.updateProfileInfo(updatedData.name, updatedData.about)
+    api.editAvatar(updatedData.avatar)
       .then((userInfo) => {
         setCurrentUser(userInfo);
         closeAllPopups();
@@ -64,10 +99,10 @@ function App() {
       });
   };
 
-  // Запись обновленной ссылки на аватар
-  const handleUpdateAvatar = (updatedData) => {
+  // Запись обновленных пользовательских данных
+  const handleUpdateUser = (updatedData) => {
     setButtonText('Сохранение...');
-    api.editAvatar(updatedData.avatar)
+    api.updateProfileInfo(updatedData.name, updatedData.about)
       .then((userInfo) => {
         setCurrentUser(userInfo);
         closeAllPopups();
@@ -98,50 +133,6 @@ function App() {
       });
   };
 
-  // Обработчик лайка карточки
-  const handleCardLike = (card) => {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) => state.map((c) => ((c._id === card._id) ? newCard : c)));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  // Открытие попапа редактирования аватара
-  const handleEditAvatar = () => {
-    setButtonText('Сохранить');
-    setIsEditAvatarPopupOpen(true);
-  };
-
-  // Открытие попапа редактирования информации о пользователе
-  const handleEditProfile = () => {
-    setButtonText('Сохранить');
-    setIsEditProfilePopupOpen(true);
-  };
-
-  // Открытие попапа добавления новой карточки
-  const handleAddPlace = () => {
-    setButtonText('Создать');
-    setIsAddPlacePopupOpen(true);
-  };
-
-  // Открытие попапа с увеличенной картинкой
-  const handleCardClick = (card) => {
-    setSelectedCard(card);
-    setIsCardPopupOpen(true);
-  };
-
-  // Открытие попапа с подтверждением удаления карточки
-  const handleCardDelete = (card) => {
-    setButtonText('Да');
-    setSelectedCard(card);
-    setIsPopupConfirmDeleteOpen(true);
-  };
   // Удаления карточки
   const handleConfirmDeleteSubmit = () => {
     setButtonText('Удаление...');
@@ -156,6 +147,20 @@ function App() {
       })
       .finally(() => {
         // setButtonText('Да');
+      });
+  };
+
+  // Обработчик лайка карточки
+  const handleCardLike = (card) => {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => ((c._id === card._id) ? newCard : c)));
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
