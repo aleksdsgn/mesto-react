@@ -42,37 +42,35 @@ function Card({
   }
 
   return (
-    <li className="places__element">
-      <article className="card">
-        <button
-          onClick={() => handleDeleteClick()}
-          className={cardDeleteButtonClassName}
-          type="button"
-          aria-label="Удалить"
-        />
-        {/* eslint-disable */}
-        <img
-          className="card__image"
-          src={card.link}
-          alt={card.name}
-          onClick={() => handleCardClick()}
-          // onKeyDown={() => handleCardClick()}
-        />
-        {/* eslint-disable */}
-        <div className="card__info">
-          <h2 className="card__title">{card.name}</h2>
-          <div className="card__like-container">
-            <button
-              onClick={() => handleLikeClick()}
-              className={cardLikeButtonClassName}
-              type="button"
-              aria-label="Нравится"
-            />
-            <p className="card__likes-counter">{card.likes.length}</p>
-          </div>
+    <article className="card">
+      <button
+        onClick={() => handleDeleteClick()}
+        className={cardDeleteButtonClassName}
+        type="button"
+        aria-label="Удалить"
+      />
+      {/* eslint-disable */}
+      <img
+        className="card__image"
+        src={card.link}
+        alt={card.name}
+        onClick={() => handleCardClick()}
+        // onKeyDown={() => handleCardClick()}
+      />
+      {/* eslint-disable */}
+      <div className="card__info">
+        <h2 className="card__title">{card.name}</h2>
+        <div className="card__like-container">
+          <button
+            onClick={() => handleLikeClick()}
+            className={cardLikeButtonClassName}
+            type="button"
+            aria-label="Нравится"
+          />
+          <p className="card__likes-counter">{card.likes.length}</p>
         </div>
-      </article>
-    </li>
+      </div>
+    </article>
   );
 }
 

@@ -54,13 +54,14 @@ function Main({
       <section className="places">
         <ul className="places__container">
           {cards.map((card) => (
-            <Card
-              key={(card._id)}
-              card={card}
-              onCardClick={onCardClick}
-              onCardLike={onCardLike}
-              onCardDelete={onCardDelete}
-            />
+            <li key={(card._id)} className="places__element">
+              <Card
+                card={card}
+                onCardClick={onCardClick}
+                onCardLike={onCardLike}
+                onCardDelete={onCardDelete}
+              />
+            </li>
           ))}
         </ul>
       </section>
