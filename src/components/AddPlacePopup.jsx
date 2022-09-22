@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+function AddPlacePopup({
+  isOpen,
+  onClose,
+  onAddPlace,
+  buttonText,
+}) {
   const [namePlace, setNamePlace] = useState('');
   const [linkPlace, setLinkPlace] = useState('');
-  // текст в кнопке по умолчанию
-  const [buttonText, setButtonText] = useState('Создать');
 
   // Обработчик изменения значения в инпуте названия места
   const handleChangeNamePlace = (e) => {
@@ -19,8 +22,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
 
   // Обработчик сабмита
   const handleSubmit = (e) => {
-    // после нажатия показываем в кнопке "индикатор" отправки
-    setButtonText('Сохранение...');
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
@@ -28,8 +29,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   };
 
   useEffect(() => {
-    // Сбрас текста кнопки при открытии попапа
-    setButtonText('Создать');
     // Очистка полей ввода
     setNamePlace('');
     setLinkPlace('');

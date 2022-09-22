@@ -21,6 +21,7 @@ function App() {
   const [isPopupConfirmDeleteOpen, setIsPopupConfirmDeleteOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
+  const [buttonText, setButtonText] = useState('');
 
   // Запрос карточек и данных профиля через API
   useEffect(() => {
@@ -48,37 +49,52 @@ function App() {
 
   // Запись обновленных пользовательских данных
   const handleUpdateUser = (updatedData) => {
+    setButtonText('Сохранение...');
     api.updateProfileInfo(updatedData.name, updatedData.about)
       .then((userInfo) => {
         setCurrentUser(userInfo);
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
+        // уведомить об ошибке в тексте кнопки
+        setButtonText(`${err}`);
+      })
+      .finally(() => {
+        // setButtonText('Сохранить');
       });
   };
 
   // Запись обновленной ссылки на аватар
   const handleUpdateAvatar = (updatedData) => {
+    setButtonText('Сохранение...');
     api.editAvatar(updatedData.avatar)
       .then((userInfo) => {
         setCurrentUser(userInfo);
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
+        // уведомить об ошибке в тексте кнопки
+        setButtonText(`${err}`);
+      })
+      .finally(() => {
+        // setButtonText('Сохранить');
       });
   };
 
   // Создание новой карточки
   const handleAddPlaceSubmit = (name, link) => {
+    setButtonText('Сохранение...');
     api.createCard(name, link)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
+        // уведомить об ошибке в тексте кнопки
+        setButtonText(`${err}`);
+      })
+      .finally(() => {
+        // setButtonText('Создать');
       });
   };
 
@@ -98,16 +114,19 @@ function App() {
 
   // Открытие попапа редактирования аватара
   const handleEditAvatar = () => {
+    setButtonText('Сохранить');
     setIsEditAvatarPopupOpen(true);
   };
 
   // Открытие попапа редактирования информации о пользователе
   const handleEditProfile = () => {
+    setButtonText('Сохранить');
     setIsEditProfilePopupOpen(true);
   };
 
   // Открытие попапа добавления новой карточки
   const handleAddPlace = () => {
+    setButtonText('Создать');
     setIsAddPlacePopupOpen(true);
   };
 
@@ -119,18 +138,24 @@ function App() {
 
   // Открытие попапа с подтверждением удаления карточки
   const handleCardDelete = (card) => {
+    setButtonText('Да');
     setSelectedCard(card);
     setIsPopupConfirmDeleteOpen(true);
   };
   // Удаления карточки
   const handleConfirmDeleteSubmit = () => {
+    setButtonText('Удаление...');
     api.deleteCardById(selectedCard._id)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== selectedCard._id));
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
+        // уведомить об ошибке в тексте кнопки
+        setButtonText(`${err}`);
+      })
+      .finally(() => {
+        // setButtonText('Да');
       });
   };
 
@@ -157,6 +182,7 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          buttonText={buttonText}
         />
 
         {/* форма редактирования профиля */}
@@ -164,6 +190,7 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          buttonText={buttonText}
         />
 
         {/* форма добавления карточек */}
@@ -171,6 +198,7 @@ function App() {
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          buttonText={buttonText}
         />
 
         {/* попап удаления карточки */}
@@ -178,6 +206,7 @@ function App() {
           isOpen={isPopupConfirmDeleteOpen}
           onClose={closeAllPopups}
           onConfirm={handleConfirmDeleteSubmit}
+          buttonText={buttonText}
         />
 
         {/* попап открытой карточки */}

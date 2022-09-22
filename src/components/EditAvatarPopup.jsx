@@ -1,14 +1,15 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+function EditAvatarPopup({
+  isOpen,
+  onClose,
+  onUpdateAvatar,
+  buttonText,
+}) {
   const avatarRef = useRef();
-  // текст в кнопке по умолчанию
-  const [buttonText, setButtonText] = useState('Сохранить');
 
   const handleSubmit = (e) => {
-    // после нажатия показываем в кнопке "индикатор" отправки
-    setButtonText('Сохранение...');
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // Передаём значения инпута во внешний обработчик
@@ -18,9 +19,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   };
 
   useEffect(() => {
-    // Сбрас текста кнопки при открытии попапа
-    setButtonText('Сохранить');
-    // Сбрас поля ввода
+    // Сброс поля ввода
     avatarRef.current.value = '';
   }, [isOpen]);
 
