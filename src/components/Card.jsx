@@ -49,15 +49,13 @@ function Card({
         type="button"
         aria-label="Удалить"
       />
-      {/* eslint-disable */}
       <img
         className="card__image"
         src={card.link}
         alt={card.name}
         onClick={() => handleCardClick()}
-        // onKeyDown={() => handleCardClick()}
+        role="presentation"
       />
-      {/* eslint-disable */}
       <div className="card__info">
         <h2 className="card__title">{card.name}</h2>
         <div className="card__like-container">
